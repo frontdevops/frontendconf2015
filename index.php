@@ -35,13 +35,17 @@
 	<section class="slide shout grow"><div><h2>Вопросы?</h2></div></section>
 	<section class="slide" id="myContacts">
 		<div>
-			<h2>TypeScript <br/> Особенности разработки</h2>
-			<p><strong>Александр Майоров</strong>, <a href="http://tutu.ru">Tutu.ru</a></p>
-			<ul>
-				<li><a href="mailto:mayorov@tutu.ru">mayorov@tutu.ru</a></li>
-				<li><a href="http://majorov.su">majorov.su</a></li>
-			</ul>
-			<p>Презентация: <a href="http://frontendconf.majorov.su/">frontendconf.majorov.su</a></p>
+			<h2>Александр Майоров</h2>
+			<h3 style="margin-top: -5%; margin-bottom: 1.5%; font-size: 140%; font-weight: bold"><a href="http://tutu.ru">Tutu.ru</a></h3>
+			<p>Контакты: <br/>
+				&#9675; <a href="mailto:mayorov@tutu.ru">mayorov@tutu.ru</a><br/>
+				&#9675; <a href="http://majorov.su">majorov.su</a>
+			</p>
+			<p>Презентация: <br/>
+				&#9675; <a href="http://frontendconf.majorov.su/">frontendconf.majorov.su</a><br/>
+				&#9675; <a href="https://github.com/i0z/frontendconf2015">github.com/i0z/frontendconf2015</a>
+			</p>
+
 		</div>
 	</section>
 
