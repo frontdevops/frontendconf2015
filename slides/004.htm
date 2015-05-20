@@ -1,0 +1,114 @@
+<section class="slide cover" style="background: #fff">
+	<div>
+		<div style="float: right">
+			<h2>Подключение <br/> существующего <br/> <s>legacy</s> кода</h2>
+		</div>
+		<img src="assets/r2d2-usb.jpg" alt="." style="height: 100%"/>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Пример подключения *.js в *.ts</h2>
+		<ul>
+			<li>newApp.ts</li>
+			<li>lib/crypt.js</li>
+		</ul>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3>lib/crypt.js</h3>
+		<pre class="hl typescript">define(function () {
+    function md5() { /* ... */ }
+    function uid() { /* ... */ }
+    return {
+        md5: md5,
+        uid: uid
+    }
+});</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3>newApp.ts</h3>
+		<pre class="hl actionscript memo">class AppController {
+    private _uid: string;
+    constructor() { ... }
+    setUid(): string {
+        return this._uid = crypt.uid(); // crypt в legacy
+    }
+    init(): void { ... }
+    run(): void { ... }
+    static exec(ctrl: AppController): void { ... }
+}
+
+export = AppController;</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3>newApp.ts</h3>
+		<pre class="hl actionscript memo">/// &lt;amd-dependency path="lib/crypt" /&gt;
+class AppController {
+    setUid(): string {}
+}</pre>
+		<p></p>
+		<pre class="hl actionscript memo">define(["require", "exports", "lib/crypt"], function (require, exports) {
+var AppController = (function () {
+        function AppController() {}
+        AppController.prototype.setUid = function () { this._uid = crypt.uid() };
+        return AppController;
+    })();
+    return AppController;
+});
+</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3>newApp.ts</h3>
+		<pre class="hl actionscript memo">/// &lt;amd-dependency path="lib/crypt" /&gt;
+declare var require:any;
+var crypt = require("lib/crypt");
+class AppController { ... }</pre>
+		<p></p>
+		<pre class="hl actionscript memo">define(["require", "exports", "lib/crypt"], function (require, exports) {
+var crypt = require("lib/crypt");
+var AppController = (function () {
+        function AppController() {}
+        AppController.prototype.setUid = function () { this._uid = crypt.uid() };
+        return AppController;
+    })();
+    return AppController;
+});</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3lib/>crypt.d.ts</h3>
+		<pre class="hl typescript">declare module "lib/crypt" {
+    export function md5() :string;
+    export function uid() :string;
+}</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3>newApp.ts</h3>
+		<pre class="hl actionscript memo">/// &lt;require path="lib/crypt.d.ts" /&gt;
+import crypt = require("lib/crypt");
+
+class AppController { ... }</pre>
+		<p></p>
+		<pre class="hl actionscript memo">define(["require", "exports", "lib/crypt"], function (require, exports, crypt) {
+    var AppController = (function () {
+        function AppController() {}
+        AppController.prototype.setUid = function () { this._uid = crypt.uid() };
+        return AppController;
+    })();
+    return AppController;
+});
+</pre>
+	</div>
+</section>

@@ -1,0 +1,146 @@
+<section class="slide shout" style="background: #fff url(assets/react.png) center no-repeat">
+	<div>
+		<h2 style="margin-top:-2%">TypeScript <br/>+<br/> React</h2>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>TypeScript ничего не знает про JSX</h2>
+		<pre class="hl typescript">render: function() {
+    return &lt;div className="train"&gt;
+        &lt;div className="title"&gt;{this.state.title}&lt;/div&gt;
+        &lt;/div&gt;
+}</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>TypeScript умеет жить с React</h2>
+		<pre class="hl typescript">render: function() {
+    return React.jsx(
+            "&lt;div className="train"&gt;
+                &lt;div className="title"&gt;{this.state.title}&lt;/div&gt;
+            &lt;/div&gt;"
+        )
+}</pre>
+	</div>
+</section>
+<section class="slide shout" style="background: #222222">
+	<div>
+		<img src="assets/s7.png" alt="." style="width: 100%;margin-top: 16%;"/>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>React Templates</h2>
+		<ul>
+			<li>npm install react-templates -g</li>
+		</ul>
+		<ul>
+			<li>npm install grunt-react-templates --save-dev</li>
+			<li>WebStorm plugin: http://plugins.jetbrains.com/plugin/7648</li>
+		</ul>
+		<p>Документация: <a href="http://wix.github.io/react-templates/">wix.github.io/react-templates</a></p>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>Пример работы TS c RT(JSX)</h2>
+		<h3>Структура компонента</h3>
+		<p>.../page/train/seats/carMap/carMap/</p>
+		<ul>
+			<li>carMapItem
+				<ul>
+					<li>carMapItem.rt</li>
+					<li>carMapItem.rt.js</li>
+					<li>carMapItem.js / carMapItem.ts</li>
+				</ul>
+			</li>
+			<li>modelFactory.ts</li>
+		</ul>
+	</div>
+</section>
+<section class="slide">
+	<div class="memo">
+		<h3>carMapItem.rt</h3>
+<pre class="hl html compact">&lt;rt-require dependency="bemp/blocks/popup/component" as="Popup"/&gt;
+&lt;rt-require dependency="bemp/blocks/train/seats/carMap/legend/component" as="Legend"/&gt;
+&lt;div class="car_wrapper"&gt;
+    &lt;Ereg isAvailable={this.props...} schemeHeight={this...} className="..."&gt;
+    &lt;/Ereg&gt;{this.props.children}&lt;div class="..." rt-if="..."&gt;
+        &lt;Popup
+            innerHtml={this.props.errorMessage}
+            active="{!this.state.popupHiddenByClick}"
+            onClose={this.onPopupClosed}&gt;&lt;/Popup&gt;
+    &lt;/div&gt;
+    &lt;Legend rt-if="this.props.showLegend" className="..."/&gt;
+&lt;/div&gt;</pre>
+	</div>
+</section>
+<section class="slide">
+	<div class="memo">
+		<h3>carMapItem.rt.js</h3>
+<pre class="hl javascript compact">define([
+    'react/addons', 'lodash', 'bemp/blocks/popup/component', ...
+], function (React, _, Popup, ...) {
+    'use strict';
+    return function () {
+        return React.createElement('div', {...}, React.createElement(Ereg, {
+            'isAvailable': this.props.isEregAvailable, ...
+        }),
+        this.props.errorMessage
+            ? React.createElement('div', {...}, React.createElement(Popup, {
+                    'innerHtml': this.props.errorMessage,
+                    'onClose': this.onPopupClosed
+                }))
+            : null,
+	    ...
+    };
+});
+</pre>
+	</div>
+</section>
+<section class="slide">
+	<div class="memo">
+		<h3>carMapItem.js</h3>
+<pre class="hl javascript memo">define(['react', './carMapItem.rt', ...], function (React, template, ...) {
+    return React.createClass({
+        displayName: 'carMapItem',
+        getDefaultProps: function () {
+            return { ... }
+        },
+        checkErrorMessage: function (props) { ... },
+        getInitialState: function () {
+            return { ... }
+        },
+        onPopupClosed: function () {
+            this.setState({ ... })
+        },
+        render: template
+    });
+});
+</pre>
+	</div>
+</section>
+<section class="slide">
+	<div class="memo">
+		<h3>carMapItem.ts</h3>
+<pre class="hl actionscript memo">import React = require("react");
+import template = require("./carMapItem.rt");
+
+class carMapItem extends React.Component {
+        public displayName:string = 'carMapItem',
+        static defaultProps = {
+            ...
+            onErrorShow: () => void 0
+        }
+        getInitialState() { return { ... } }
+        onPopupClosed() { this.setState({ ... }) }
+        render() { return template }
+}
+
+export = carMapItem;
+</pre>
+	</div>
+</section>
+

@@ -1,0 +1,78 @@
+<section class="slide cover _cover">
+	<div>
+		<h2>Управляющие <br/> комментарии</h2>
+		<img src="assets/controlcomment.jpg" alt="." style="width: 100%"/>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>&nbsp;</h2>
+		<h2>&nbsp;</h2>
+		<h2>/// &lt;reference path="file-name.d.ts" /&gt;</h2>
+		<!--p>Указывает компилятору где задекларирован используемый код. Применяется, если нужно подключить описание типов.</-->
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>/// &lt;amd-module name="myName" /&gt;</h2>
+		<!--Задает имя для текущего модуля AMD.-->
+		<pre class="hl typescript">/// &lt;amd-module name="lib/md5" /&gt;
+function md5() { ... }
+export = md5;</pre>
+		<p></p>
+		<pre class="hl typescript">define("lib/md5", ["require", "exports"], function (require, exports) {
+        function md5() { ... }
+            return md5;
+});</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>&nbsp;</h2>
+		<h2>/// &lt;amd-dependency path="dir/file" /&gt;</h2>
+		<!--p>При использовании AMD применяется для указания зависимости.
+			Зависимость добавляется и подключается, но не создается переменная для использования.
+			Результат:</p-->
+		<pre class="hl typescript">/// &lt;amd-dependency path="lib/global" /&gt;</pre>
+		<p></p>
+		<pre class="hl typescript">define(["require", "exports", "lib/global"], function (require, exports) { ... });</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 style="white-space: nowrap;margin-left: -3%">///&lt;amd-dependency path="file" name="var"/&gt;</h2>
+		<!--Указывает зависимость и прокидывает аргумент.-->
+		<pre class="hl actionscript">/// &lt;amd-dependency path="legacy/base/view" name="View" /&gt;
+View.someDo();
+</pre>
+		<p></p>
+		<pre class="hl typescript">define(["require", "exports", "legacy/base/view"],
+    function (require, exports, View) {
+        View.someDo();
+    }
+);</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>&lt;amd-dependency path="..." name="..." /&gt;</h2>
+		<pre class="hl actionscript">/// &lt;reference path="legacy/base/view.d.ts" /&gt;
+/// &lt;amd-dependency path="legacy/base/view" name="View" /&gt;
+</pre>
+		<p><br/>Эквивалентно записи:</p>
+		<pre class="hl typescript">/// &lt;reference path="legacy/base/view.d.ts" /&gt;
+import View = require("legacy/base/view");
+</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>/// &lt;reference no-default-lib="true" /&gt;</h2>
+		<h3>0_o</h3>
+		<!--Указывает зависимость и прокидывает аргумент.
+		Не подключать дефолтный lib.d.ts.
+			Эта строчка в сам lib.d.ts, что бы не было рекурсивного парсинга.
+			Если добавить эту директиву в файл, то пропадет описание множества интерфейсов, что не позволит нормально работать.
+			При указании версии ES6 через аргумент --target, будет подключен алтернативный дефолтный файл: lib.es6.d.ts-->
+	</div>
+</section>

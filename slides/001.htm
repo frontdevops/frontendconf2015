@@ -1,0 +1,149 @@
+<section class="slide cover _cover" id="myth">
+	<div>
+		<h2>Мифы о TypeScript</h2>
+		<img src="assets/s3.jpg" alt="." style="width: 100%"/>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>Мифы о TypeScript</h2>
+		<ol>
+			<li>Это другой язык, как и CoffeeScript</li>
+			<li>Закрытый исходный код</li>
+			<li>Разрабатывать можно только в VisualStudio</li>
+			<li>Корректно работает только с Windows</li>
+			<li>Генерит лишний код</li>
+			<li>Медленный</li>
+		</ol>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Это другой язык, как и CoffeeScript</h2>
+		<pre class="hl typescript">
+
+let say =  (def:string):string  => `TypeScript is ${def}!`;
+say('pretty amazing')
+		</pre>
+		<!-- Нет, это не какой-то диалект. Это ES.Next синтаксис. Изучая TS вы инвестируете в свои знания будущего стандарта. -->
+	</div>
+</section>
+<section class="slide" id="opensource">
+	<div>
+		<img src="assets/opensource.png" alt="."/>
+		<h2 class="notyet">Закрытый исходный код</h2>
+		<p>Исходники по адресу: <br/>
+			<a href="https://github.com/Microsoft/TypeScript/">https://github.com/Microsoft/TypeScript/</a>
+		</p>
+
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Разрабатывать можно только в Visual Studio</h2>
+		<h3>IDE supports</h3>
+		<ul>
+			<li>&#9733; WebStorm, PhpStorm, ...</li>
+			<li class="next">&#9734; Sublime Text (2,3)</li>
+			<li class="next" title="brackets">Atom (<a href="https://atom.io/">atom.io</a>)</li>
+			<li class="next">TypeEcs for Eclips (<a href="http://typecsdev.com/">typecsdev.com</a>)</li>
+			<li class="next">MS Visual Studi&#9786;</li>
+		</ul>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Корректно работает только с Windows</h2>
+		<pre class="p">
+			<code><mark>npm</mark> install -g typescript</code>
+			<code><mark>tsc</mark> my_application.ts</code>
+		</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Генерит лишний код</h2>
+		<pre class="hl typescript">var say =  (def:string):string  => `TypeScript is ${def}!`;
+say('pretty amazing');</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Генерит лишний код</h2>
+		<pre class="hl typescript">var say =  (def:string):string  => `TypeScript is ${def}!`;
+say('pretty amazing');</pre>
+		<h3>Результат:</h3>
+		<pre class="hl typescript">var say = function (def) { return ("TypeScript is " + def + "!"); };
+say('pretty amazing');</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h3>Тот же результат на CoffeeScript</h3>
+<pre class="hl typescript">(function() {
+    var say;
+    say = (function(_this) {
+        return function(def) {
+            return "TypeScript is " + def + "!";
+        };
+  	})(this);
+    say('pretty amazing');
+}).call(this);</pre>
+	</div>
+</section>
+<section class="slide">
+	<div style="margin-left: -8%;width: 92%">
+		<h3>TypeScript vs CoffeeScript. Результат компиляции</h3>
+		<div style="float: left;width: 49%"><pre class="hl typescript">var gvstr;
+var _this = this; // Babel делает так же
+var say = function (def) {
+
+    return _this.gvstr = "T..." + def + "!"
+};
+
+say('pretty amazing');
+
+</pre></div>
+<div style="float: right;width: 49%"><pre class="hl typescript">(function() {
+    var say;
+    say = (function(_this) {
+        return function(def) {
+            return "T..." + def + "!";
+            };
+    })(this);
+    say('pretty amazing');
+}).call(this);</pre></div>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Генерит лишний код</h2>
+		<pre class="hl cpp">enum Color { Red, Green, Blue }
+var color :Color = Color.Green;</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Генерит лишний код</h2>
+<pre class="hl typescript">var Color;
+(function (Color) {
+    Color[Color["Red"]  = 0] = "Red";
+    Color[Color["Green"]= 1] = "Green";
+    Color[Color["Blue"] = 2] = "Blue";
+})(Color || (Color = {}));
+
+var color = 1;</pre>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2 class="notyet">Генерит лишний код</h2>
+<pre class="hl cpp">const enum Color { Red, Green, Blue }
+var color :Color = Color.Green;
+</pre>
+		<h3>Результат:</h3>
+		<pre class="hl javascript">var c = 1;</pre>
+		<!-- хорошая альтернатива для реализации констант,
+		 	так как в результирующем коде не будет доступа к enum объекту -->
+	</div>
+</section>

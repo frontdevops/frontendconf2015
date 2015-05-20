@@ -1,0 +1,47 @@
+<section class="slide cover _cover" id="realuse">
+	<div>
+		<h2>Реальная практика использования <br/> TypeScript</h2>
+		<img src="assets/realuse.jpg" alt="."/>
+	</div>
+</section>
+<section class="slide">
+	<div>
+		<h2>Способы подключения</h2>
+		<ul>
+			<li>FileWatchers in IDE</li>
+			<li>TypeScript Compiler in IDE</li>
+			<li>tsc, grunt, gulp, ...</li>
+		</ul>
+	</div>
+</section>
+<section class="slide">
+	<div style="margin-top: -5%;">
+		<h2>TypeScript Compiler</h2>
+		<p style="font-size: 70%;margin:0 0 1% 0">File &rarr; Settings &rarr; Language & Frameworks &rarr; TypeScript &rarr; Enable TypeScript Compiler</p>
+		<img src="assets/tscjetbr.png" alt="." style="width: 100%"/>
+	</div>
+</section>
+<!--section class="slide cover _cover">
+	<div>
+		<h2>Проблемы</h2>
+		<img src="assets/trouble.jpg" alt="." style="height: 100%; float: right">
+	</div>
+</--section>
+<section class="slide">
+	<div>
+		<h2>Проблема с символами окончания строк (CRLF/LF) в скомпилированных файлах</h2>
+	</div>
+</section>
+<section-- class="slide">
+	<div>
+		<h2>Установка CRLF/LF</h2>
+		<ul>
+			<li>Найти файл typescriptServices.js</li>
+			<li>Открыть файл на изменение и найти строку newLine: _os.EOL,</li>
+			<li>Вместо _os.EOL нужно написать "\n" (соответствует LF)</li>
+		</ul>
+		<p style="font-size: 70%">Почему так сложно? Я хочу указывать символ окончания строки через параметры.
+			Эту проблему уже решают и, возможно, скоро добавят флаг options.newLine. Детали по ссылке:
+			https://github.com/Microsoft/TypeScript/pull/2921</p>
+	</div>
+</section-->
